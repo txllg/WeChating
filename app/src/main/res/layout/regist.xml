@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistActivity"
+    android:background="@drawable/login_background">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="欢迎注册"
+        android:textSize="35sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp" />
+
+    <EditText
+        android:id="@+id/regist_username_input"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入用户名"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:layout_marginTop="20dp"
+        android:id="@+id/regist_password_input"
+        android:gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/rounded_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="请输入密码"
+        android:inputType="textPassword"
+        android:layout_below="@id/regist_username_input"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/error_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_vertical"
+        android:textColor="@color/design_default_color_error"
+        android:layout_below="@+id/regist_password_input"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btn_regist"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:text="注册"
+        android:layout_below="@id/error_tip"
+        android:layout_centerHorizontal="true"
+        android:background="@color/design_default_color_primary"/>
+
+    <Button
+        android:id="@+id/toLogin_id"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:text="已有账号，去登陆"
+        android:layout_below="@id/btn_regist"
+        android:layout_centerHorizontal="true"
+        android:background="@color/design_default_color_primary"/>
+
+</RelativeLayout>

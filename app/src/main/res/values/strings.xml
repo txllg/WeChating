@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeChating</string>
+    <string name="title_activity_index">MainActivity</string>
+    <string name="message">消息</string>
+    <string name="friends">通讯录</string>
+    <string name="news">朋友圈</string>
+    <string name="mine">我的</string>
+</resources>

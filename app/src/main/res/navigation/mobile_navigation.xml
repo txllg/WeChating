@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/message_id">
+
+    <fragment
+        android:id="@+id/message_id"
+        android:name="com.example.wechating.ui.index.IndexFragment"
+        android:label="@string/message"
+        tools:layout="@layout/fragment_index" />
+
+    <fragment
+        android:id="@+id/friends_id"
+        android:name="com.example.wechating.ui.friends.FriendsFragment"
+        android:label="@string/friends"
+        tools:layout="@layout/fragment_friends" />
+
+    <fragment
+        android:id="@+id/news_id"
+        android:name="com.example.wechating.ui.news.NewsFragment"
+        android:label="@string/news"
+        tools:layout="@layout/fragment_news" />
+
+    <fragment
+        android:id="@+id/mine_id"
+        android:name="com.example.wechating.ui.mine.MineFragment"
+        android:label="@string/mine"
+        tools:layout="@layout/fragment_mine" />
+</navigation>
