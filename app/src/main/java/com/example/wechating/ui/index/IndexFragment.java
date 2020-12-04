@@ -23,7 +23,7 @@ public class IndexFragment extends Fragment {
         indexViewModel =
                 new ViewModelProvider(this).get(IndexViewModel.class);
         View root = inflater.inflate(R.layout.fragment_index, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
+        final TextView textView = root.findViewById(R.id.text_index);
         indexViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
