@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.wechating.component.MessageSlideLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/message_profile"/>
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="412dp"
+        android:layout_height="70dp"
+        android:background="@color/design_default_color_background"
+        android:gravity="center_vertical"
+        android:textColor="#336598"
+        android:textSize="25sp"
+        android:layout_marginLeft="60dp"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/message_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/delete"
+        android:textSize="18sp" />
+</com.example.wechating.component.MessageSlideLayout>

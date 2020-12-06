@@ -5,23 +5,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wechating.R;
 import com.example.wechating.component.SideBar;
-import com.example.wechating.component.SortAdapter;
+import com.example.wechating.component.FriendsSlideLayout;
 import com.example.wechating.domain.Friends;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class FriendsFragment extends Fragment {
 
@@ -29,7 +33,9 @@ public class FriendsFragment extends Fragment {
     private ListView listView;
     private SideBar sideBar;
     private ArrayList<Friends> list;
-    private Context context;
+    private MyAdapter myAdapter;
+    private Set<FriendsSlideLayout> sets = new HashSet();
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,18 +48,13 @@ public class FriendsFragment extends Fragment {
 
             }
         });
-        listView = (ListView) root.findViewById(R.id.listView);
+        listView = (ListView) root.findViewById(R.id.friends_listView);
         sideBar = (SideBar) root.findViewById(R.id.side_bar);
         initView();
         initData();
         return root;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context=getActivity().getApplicationContext();
-    }
 
         private void initView() {
 
@@ -84,8 +85,147 @@ public class FriendsFragment extends Fragment {
         list.add(new Friends("美羊羊"));
         list.add(new Friends("懒羊羊"));
         Collections.sort(list); // 对list进行排序，需要让User实现Comparable接口重写compareTo方法
-        SortAdapter adapter = new SortAdapter(getActivity().getApplicationContext(), list);
-        listView.setAdapter(adapter);
+        myAdapter = new MyAdapter(getActivity().getApplicationContext(), list);
+        listView.setAdapter(myAdapter);
 
     }
+
+
+    class MyAdapter extends BaseAdapter
+    {
+        private Context content;
+        private ArrayList<Friends> datas;
+        private MyAdapter(Context context, ArrayList<Friends> datas)
+        {
+            this.content = context;
+            this.datas = datas;
+        }
+        @Override
+        public int getCount() {
+            return datas.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return datas.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder viewHolder=null;
+            final Friends friends = datas.get(position);
+
+            if (convertView == null)
+            {
+                convertView = LayoutInflater.from(content).inflate(R.layout.friends_item, null);
+                viewHolder = new ViewHolder();
+                viewHolder.nameView= (TextView) convertView.findViewById(R.id.name);
+                viewHolder.catlogView= (TextView) convertView.findViewById(R.id.catalog);
+                viewHolder.menuView = (TextView) convertView.findViewById(R.id.menu_friends);
+                viewHolder.profile=(ImageView) convertView.findViewById(R.id.friends_profile);
+                convertView.setTag(viewHolder);
+            }else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+            viewHolder.profile.setImageResource(R.drawable.app);
+            viewHolder.nameView.setText(datas.get(position).getName());
+
+
+            //根据position获取首字母作为目录catalog
+            String catalog = list.get(position).getFirstLetter();
+
+            //如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
+            if(position == getPositionForSection(catalog)){
+                viewHolder.catlogView.setVisibility(View.VISIBLE);
+                viewHolder.catlogView.setText(friends.getFirstLetter().toUpperCase());
+            }else{
+                viewHolder.catlogView.setVisibility(View.GONE);
+            }
+
+
+
+            viewHolder.nameView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(content, "click "+((TextView)v).getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            viewHolder.menuView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    FriendsSlideLayout slideLayout = (FriendsSlideLayout) v.getParent();
+                    slideLayout.closeMenu(); //解决删除item后下一个item变成open状态问题
+                    datas.remove(friends);
+                    notifyDataSetChanged();
+                }
+            });
+
+            FriendsSlideLayout slideLayout = (FriendsSlideLayout) convertView;
+            slideLayout.setOnStateChangeListener(new MyOnStateChangeListener());
+
+
+            return convertView;
+        }
+
+        public FriendsSlideLayout slideLayout = null;
+        class MyOnStateChangeListener implements FriendsSlideLayout.OnStateChangeListener
+        {
+            /**
+             * 滑动后每次手势抬起保证只有一个item是open状态，加入sets集合中
+             **/
+            @Override
+            public void onOpen(FriendsSlideLayout layout) {
+                slideLayout = layout;
+                if (sets.size() > 0) {
+                    for (FriendsSlideLayout s : sets) {
+                        s.closeMenu();
+                        sets.remove(s);
+                    }
+                }
+                sets.add(layout);
+            }
+
+            @Override
+            public void onMove(FriendsSlideLayout layout) {
+                if (slideLayout != null && slideLayout !=layout)
+                {
+                    slideLayout.closeMenu();
+                }
+            }
+
+            @Override
+            public void onClose(FriendsSlideLayout layout) {
+                if (sets.size() > 0) {
+                    sets.remove(layout);
+                }
+                if(slideLayout ==layout){
+                    slideLayout = null;
+                }
+            }
+        }
+
+        public int getPositionForSection(String catalog) {
+            for (int i = 0; i < getCount(); i++) {
+                String sortStr = list.get(i).getFirstLetter();
+                if (catalog.equalsIgnoreCase(sortStr)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
+    static class ViewHolder
+    {
+        public TextView catlogView;
+        public TextView menuView;
+        public TextView nameView;
+        public ImageView profile;
+    }
+
 }

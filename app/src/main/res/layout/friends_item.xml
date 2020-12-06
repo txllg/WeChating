@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.wechating.component.FriendsSlideLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+
+    <RelativeLayout
+        android:layout_width="472dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/catalog"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#E0E0E0"
+            android:textColor="#454545"
+            android:textSize="20sp"
+            android:padding="10dp"/>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/friends_profile"
+                android:layout_below="@id/catalog" />
+
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="412dp"
+                android:layout_height="70dp"
+                android:background="@color/design_default_color_background"
+                android:gravity="center_vertical"
+                android:textColor="#336598"
+                android:textSize="25sp"
+                android:layout_marginLeft="60dp"
+                android:padding="10dp"
+                android:layout_below="@id/catalog"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/menu_friends"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:background="#ff0000"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/deleteFriend"
+        android:textSize="18sp" />
+</com.example.wechating.component.FriendsSlideLayout>
+
+
+
+
+

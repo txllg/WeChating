@@ -5,4 +5,6 @@
     <string name="friends">通讯录</string>
     <string name="news">朋友圈</string>
     <string name="mine">我的</string>
+    <string name="deleteFriend">删除好友</string>
+    <string name="delete">删除</string>
 </resources>
