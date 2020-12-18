@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="wrap_content">
+
+    <item android:id="@+id/menu_addFriend"
+        android:icon="@drawable/addfriend"
+        app:showAsAction="withText"
+        android:title="@string/addFriend">
+    </item>
+    <item android:id="@+id/menu_help"
+        android:icon="@drawable/help"
+        app:showAsAction="withText"
+        android:title="@string/help">
+
+    </item>
+</menu>

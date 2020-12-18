@@ -21,13 +21,7 @@ public class UserUtil {
         return user.save();
     }
 
-    public static int deleteUser(User user){
-        return user.delete();
-    }
 
-//    public static int updateUser(User user){
-//        return user.update();
-//    }
 
     public static List<User> findAllUser(){//查询所有用户的方法
 

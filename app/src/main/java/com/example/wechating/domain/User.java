@@ -13,6 +13,7 @@ public class User extends DataSupport {
     @Column(nullable = false)//密码不为空
     private String password;
 
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -36,6 +37,7 @@ public class User extends DataSupport {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override
     public String toString() {

@@ -6,8 +6,9 @@ import org.litepal.annotation.Column;
 import org.litepal.crud.DataSupport;
 
 public class Friends extends DataSupport implements Comparable<Friends>{
-    private String name;
+    private String nickname;
     private String username;
+    private int isFriend;
 
     @Column(ignore = true)
     private String pinyin; // 姓名对应的拼音
@@ -17,22 +18,37 @@ public class Friends extends DataSupport implements Comparable<Friends>{
     public Friends() {
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public int getIsFriend() {
+        return isFriend;
+    }
+
+    public void setIsFriend(int isFriend) {
+        this.isFriend = isFriend;
+    }
+
     public Friends(String name) {
-        this.name = name;
+        this.nickname = name;
         pinyin = Cn2Spell.getPinYin(name); // 根据姓名获取拼音
         firstLetter = pinyin.substring(0, 1).toUpperCase(); // 获取拼音首字母并转成大写
         if (!firstLetter.matches("[A-Z]")) { // 如果不在A-Z中则默认为“#”
             firstLetter = "#";
         }
-
     }
 
     public String getName() {
-        return name;
+        return nickname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.nickname = name;
     }
 
     public String getPinyin() {
@@ -56,7 +72,6 @@ public class Friends extends DataSupport implements Comparable<Friends>{
     }
 
 
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -65,8 +80,11 @@ public class Friends extends DataSupport implements Comparable<Friends>{
     @Override
     public String toString() {
         return "Friends{" +
-                "name='" + name + '\'' +
+                "nickname='" + nickname + '\'' +
                 ", username='" + username + '\'' +
+                ", isFriend=" + isFriend +
+                ", pinyin='" + pinyin + '\'' +
+                ", firstLetter='" + firstLetter + '\'' +
                 '}';
     }
 

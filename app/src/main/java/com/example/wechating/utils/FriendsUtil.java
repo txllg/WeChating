@@ -26,16 +26,17 @@ public class FriendsUtil {
     public static List<Friends> findAllFriends(){//查询所有好友
         List<Friends> lists= DataSupport.findAll(Friends.class);
         return lists;
-
     }
 
-    public static boolean findFriendsByName(String name){//根据名称查找用户
-        List<User> users=UserUtil.findAllUser();
-        for(User e:users)
-            if(e.getUsername().equals(name))
-                return true;//存在该名称的用户
-
-            return false;//不存在该名称的用户
+    public static List<Friends> findMyFriends(){//查询自己的好友
+        List<Friends> lists= DataSupport.findAll(Friends.class);
+        List<Friends> res=new ArrayList<>();
+        for(Friends e:lists){
+            if(e.getIsFriend()==1)
+                res.add(e);
+        }
+        return res;
     }
+
 
 }

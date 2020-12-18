@@ -7,4 +7,6 @@
     <string name="mine">我的</string>
     <string name="deleteFriend">删除好友</string>
     <string name="delete">删除</string>
+    <string name="addFriend">添加朋友</string>
+    <string name="help">帮助与反馈</string>
 </resources>

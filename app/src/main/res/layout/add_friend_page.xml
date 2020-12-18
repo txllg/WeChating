@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddFriendPage">
+
+    <TextView
+        android:text="添加朋友 "
+        android:textSize="22dp"
+        android:textColor="@color/material_on_surface_emphasis_medium"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/add_friend_edit"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center"
+            android:hint="请输入用户名"
+            android:inputType="text"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/search_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:text="搜索" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal"
+        android:background="@color/cardview_shadow_start_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_friend_page">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/p17"
+            android:id="@+id/add_friend_profile"/>
+
+        <TextView
+            android:id="@+id/add_friend_name"
+            android:layout_width="192dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="60dp"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#336598"
+            android:text="张三"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/add_friend_btn"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:text="添加"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_friend_page2">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/notfound"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_gravity="bottom"
+            android:text="未找到用户" />
+
+    </LinearLayout>
+
+</LinearLayout>

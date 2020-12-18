@@ -12,9 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WeChating">
+        <activity android:name=".MakeMomentPage"></activity>
+        <activity android:name=".EmptyContentPage" />
+        <activity android:name=".ChatPage" />
+        <activity android:name=".AddFriendPage" />
         <activity
             android:name=".Index"
-            android:label="@string/title_activity_index"></activity>
+            android:label="@string/title_activity_index" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +28,6 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistActivity" />
-
     </application>
 
 </manifest>

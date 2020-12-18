@@ -1,5 +1,6 @@
 package com.example.wechating;
 
+import com.example.wechating.domain.Friends;
 import com.example.wechating.domain.User;
 import com.example.wechating.utils.JDBCUtils;
 import com.example.wechating.utils.UserUtil;
@@ -43,5 +44,11 @@ public class ExampleUnitTest {
             System.out.println("添加成功");
         else if(res==0)
             System.out.println("添加失败");
+    }
+
+    @Test
+    public void test2(){
+        Friends f=new Friends("haha");
+        System.out.println(f.toString());
     }
 }

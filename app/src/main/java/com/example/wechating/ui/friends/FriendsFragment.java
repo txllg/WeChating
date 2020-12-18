@@ -1,6 +1,7 @@
 package com.example.wechating.ui.friends;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.wechating.ChatPage;
 import com.example.wechating.R;
 import com.example.wechating.component.SideBar;
 import com.example.wechating.component.FriendsSlideLayout;
@@ -33,8 +35,10 @@ public class FriendsFragment extends Fragment {
     private ListView listView;
     private SideBar sideBar;
     private ArrayList<Friends> list;
+    private ArrayList<Integer> idList;
     private MyAdapter myAdapter;
     private Set<FriendsSlideLayout> sets = new HashSet();
+    private static boolean flag=false;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -71,24 +75,7 @@ public class FriendsFragment extends Fragment {
         });
     }
 
-    private void initData() {
-        list = new ArrayList<>();
-        list.add(new Friends("阿州")); // 亳[bó]属于不常见的二级汉字
-        list.add(new Friends("大娃"));
-        list.add(new Friends("二娃"));
-        list.add(new Friends("三娃"));
-        list.add(new Friends("四娃"));
-        list.add(new Friends("五娃"));
-        list.add(new Friends("六娃"));
-        list.add(new Friends("七娃"));
-        list.add(new Friends("喜羊羊"));
-        list.add(new Friends("美羊羊"));
-        list.add(new Friends("懒羊羊"));
-        Collections.sort(list); // 对list进行排序，需要让User实现Comparable接口重写compareTo方法
-        myAdapter = new MyAdapter(getActivity().getApplicationContext(), list);
-        listView.setAdapter(myAdapter);
 
-    }
 
 
     class MyAdapter extends BaseAdapter
@@ -119,6 +106,7 @@ public class FriendsFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder=null;
             final Friends friends = datas.get(position);
+            final Integer p_id=idList.get(position);
 
             if (convertView == null)
             {
@@ -132,7 +120,7 @@ public class FriendsFragment extends Fragment {
             }else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.profile.setImageResource(R.drawable.app);
+            viewHolder.profile.setImageResource(idList.get(position));
             viewHolder.nameView.setText(datas.get(position).getName());
 
 
@@ -148,11 +136,14 @@ public class FriendsFragment extends Fragment {
             }
 
 
-
+            String nickname=viewHolder.nameView.getText().toString();
             viewHolder.nameView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(content, "click "+((TextView)v).getText(), Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(getActivity(), ChatPage.class);
+                    intent.putExtra("nickname",nickname);
+                    startActivity(intent);
                 }
             });
 
@@ -162,6 +153,7 @@ public class FriendsFragment extends Fragment {
                     FriendsSlideLayout slideLayout = (FriendsSlideLayout) v.getParent();
                     slideLayout.closeMenu(); //解决删除item后下一个item变成open状态问题
                     datas.remove(friends);
+                    idList.remove(p_id);
                     notifyDataSetChanged();
                 }
             });
@@ -226,6 +218,55 @@ public class FriendsFragment extends Fragment {
         public TextView menuView;
         public TextView nameView;
         public ImageView profile;
+    }
+
+    private void initData() {
+        list=new ArrayList<>();
+        list.add(new Friends("四狗子"));
+        list.add(new Friends("五娃"));
+        list.add(new Friends("刘富贵"));
+        list.add(new Friends("七娃"));
+        list.add(new Friends("梁朝伟"));
+        list.add(new Friends("亳州"));
+        list.add(new Friends("杜琪峰"));
+        list.add(new Friends("白嫖狗"));
+        list.add(new Friends("大炮"));
+        list.add(new Friends("二娃"));
+        list.add(new Friends("饿汉"));
+        list.add(new Friends("三娃"));
+        list.add(new Friends("美羊羊"));
+        list.add(new Friends("蜘蛛侠"));
+        list.add(new Friends("渣渣辉"));
+
+        if(flag)
+            list.add(new Friends("张三"));
+        Collections.sort(list); // 对list进行排序，需要让User实现Comparable接口重写compareTo方法
+        myAdapter = new MyAdapter(getActivity().getApplicationContext(), list);
+        listView.setAdapter(myAdapter);
+
+        idList=new ArrayList<>();
+        idList.add(R.drawable.p1);
+        idList.add(R.drawable.p2);
+        idList.add(R.drawable.p3);
+        idList.add(R.drawable.p4);
+        idList.add(R.drawable.p5);
+        idList.add(R.drawable.p6);
+        idList.add(R.drawable.p7);
+        idList.add(R.drawable.p8);
+        idList.add(R.drawable.p9);
+        idList.add(R.drawable.p10);
+        idList.add(R.drawable.p11);
+        idList.add(R.drawable.p12);
+        idList.add(R.drawable.p13);
+        if(flag)
+            idList.add(R.drawable.p17);
+        idList.add(R.drawable.p18);
+        idList.add(R.drawable.p17);
+
+    }
+
+    public static void update(){
+        flag=true;
     }
 
 }

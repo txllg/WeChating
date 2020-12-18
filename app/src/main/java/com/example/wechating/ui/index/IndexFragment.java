@@ -1,8 +1,12 @@
 package com.example.wechating.ui.index;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,8 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.wechating.AddFriendPage;
+import com.example.wechating.Index;
 import com.example.wechating.R;
-import com.example.wechating.component.FriendsSlideLayout;
 import com.example.wechating.component.MessageSlideLayout;
 import com.example.wechating.domain.Friends;
 
@@ -31,6 +36,7 @@ public class IndexFragment extends Fragment {
     private IndexViewModel indexViewModel;
     private ListView listView;
     private ArrayList<Friends> mDatas;
+    private ArrayList<Integer> idList;
     private MyAdapter myAdapter;
     private Set<MessageSlideLayout> sets = new HashSet();
 
@@ -48,17 +54,31 @@ public class IndexFragment extends Fragment {
 
         listView=(ListView)root.findViewById(R.id.index_listView);
         initData();
-
         return root;
     }
 
     public void initData(){
         mDatas = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            mDatas.add(new Friends("content"+i));
-        }
+        mDatas.add(new Friends("四狗子"));
+        mDatas.add(new Friends("刘富贵"));
+        mDatas.add(new Friends("梁朝伟"));
+        mDatas.add(new Friends("杜琪峰"));
+        mDatas.add(new Friends("大炮"));
+        mDatas.add(new Friends("饿汉"));
+        mDatas.add(new Friends("美羊羊"));
+
         myAdapter = new MyAdapter(getActivity().getApplicationContext(), mDatas);
         listView.setAdapter(myAdapter);
+
+        idList=new ArrayList();
+        idList.add(R.drawable.p12);
+        idList.add(R.drawable.p8);
+        idList.add(R.drawable.p7);
+        idList.add(R.drawable.p4);
+        idList.add(R.drawable.p3);
+        idList.add(R.drawable.p5);
+        idList.add(R.drawable.p9);
+
     }
 
     class MyAdapter extends BaseAdapter
@@ -99,7 +119,7 @@ public class IndexFragment extends Fragment {
             }else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.profile.setImageResource(R.drawable.app);
+            viewHolder.profile.setImageResource(idList.get(position));
             viewHolder.contentView.setText(datas.get(position).getName());
 
             viewHolder.contentView.setOnClickListener(new View.OnClickListener() {
@@ -109,12 +129,15 @@ public class IndexFragment extends Fragment {
                 }
             });
             final Friends myContent = datas.get(position);
+            final Integer p_id=idList.get(position);
+
             viewHolder.menuView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MessageSlideLayout slideLayout = (MessageSlideLayout) v.getParent();
                     slideLayout.closeMenu(); //解决删除item后下一个item变成open状态问题
                     datas.remove(myContent);
+                    idList.remove(p_id);
                     notifyDataSetChanged();
                 }
             });
